@@ -24,6 +24,8 @@ class BlogListViewModel extends ChangeNotifier {
       );
     }
     _blogs = list;
+    print(_blogs.length);
+    print(_blogs);
   }
 
   void showCircularLoading() {

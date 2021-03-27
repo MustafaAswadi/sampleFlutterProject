@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sample_flutter_project/services/service_locator.dart';
+import 'package:sample_flutter_project/ui/views/core/landing.dart';
 import 'package:sample_flutter_project/ui/views/login/login_page.dart';
 
 void main() {
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: LoginPage(),
+      home: Landing(),
     );
   }
 }

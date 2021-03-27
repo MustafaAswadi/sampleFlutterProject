@@ -10,7 +10,7 @@ class UserTokenViewModel extends ChangeNotifier {
 
   String get myToken => _token;
 
-  void loadData() async {
+  Future<void> loadData() async {
     final token = await _storageService.getToken();
     _prepareToken(token);
     ChangeNotifier();

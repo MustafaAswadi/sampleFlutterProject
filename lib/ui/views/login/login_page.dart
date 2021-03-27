@@ -52,8 +52,8 @@ class LoginPage extends StatelessWidget {
                   width: 200.0,
                   child: RaisedButton(
                     color: Colors.black,
-                    onPressed: () {
-                      // serviceLocator.get<WebApi>().getToken();
+                    onPressed: () async {
+                      // await serviceLocator.get<WebApi>().getToken();
                       Navigator.push(
                           context,
                           MaterialPageRoute(
