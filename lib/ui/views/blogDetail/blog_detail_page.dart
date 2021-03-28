@@ -54,7 +54,7 @@ class _BlogDetailPageState extends State<BlogDetailPage> {
                     topRight: Radius.circular(50.0)),
               ),
               child: ChangeNotifierProvider<BlogViewModel>(
-                create: (context) => BlogViewModel(),
+                create: (context) => _webApiService,
                 child: Consumer<BlogViewModel>(
                   builder: (context, model, child) {
                     if (model.blog == null) {
@@ -69,21 +69,20 @@ class _BlogDetailPageState extends State<BlogDetailPage> {
                           ),
                           CircleAvatar(
                             radius: 80.0,
-                            backgroundImage:
-                                AssetImage("assets/images/test.jpg"),
+                            backgroundImage: NetworkImage(model.blog.imageUrl),
                           ),
                           SizedBox(
                             height: 20.0,
                           ),
                           Text(
-                            'Title of blog',
+                            model.blog.title,
                             style: MyCustomTextStyle().myStyle,
                           ),
                           SizedBox(
                             height: 10.0,
                           ),
                           Text(
-                            "created at: 2021",
+                            model.blog.createdAt,
                             style: TextStyle(fontSize: 15.0),
                           )
                         ],

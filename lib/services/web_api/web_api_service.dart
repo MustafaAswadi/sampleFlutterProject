@@ -36,8 +36,6 @@ class WebApi {
     await serviceLocator
         .get<StorageService>()
         .setToken(response.data['token'].toString());
-    // String token = await serviceLocator.get<StorageService>().getToken();
-    // print(token);
     return response.data['token'];
   }
 
