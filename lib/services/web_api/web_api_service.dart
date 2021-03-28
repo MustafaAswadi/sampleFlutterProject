@@ -4,7 +4,9 @@ import 'package:sample_flutter_project/services/service_locator.dart';
 import 'package:sample_flutter_project/services/storage/storage_service.dart';
 
 class WebApi {
-  Future<List<Map<String, dynamic>>> getBlogList() async {
+  List<Blog> _blogs;
+  Blog blog;
+  Future<List<Blog>> getBlogList() async {
     String token = await serviceLocator.get<StorageService>().getToken();
     Response response;
     try {
@@ -15,31 +17,44 @@ class WebApi {
       print(e.message);
       print(e.response);
     }
+    _blogs = (response.data as List).map((i) => Blog.fromJson(i)).toList();
     print(response);
-    return response.data;
+    return _blogs;
   }
 
-  Future<String> getToken() async {
-    Response response = await Dio().post(
-        'https://60585b2ec3f49200173adcec.mockapi.io/api/v1/login',
-        data: {
-          "email": "aswadhhimustkjaf@gmail.com",
-          "password": "myuaalh123"
-        });
+  Future<String> getToken(String email, String password) async {
+    Response response;
+    try {
+      response = await Dio().post(
+          'https://60585b2ec3f49200173adcec.mockapi.io/api/v1/login',
+          data: {"email": email, "password": password});
+    } on DioError catch (e) {
+      print(e.message);
+    }
+
     print(response.data['token']);
     await serviceLocator
         .get<StorageService>()
         .setToken(response.data['token'].toString());
-    String token = await serviceLocator.get<StorageService>().getToken();
-    print(token);
+    // String token = await serviceLocator.get<StorageService>().getToken();
+    // print(token);
     return response.data['token'];
   }
 
-  Future<Blog> getBlog(int id) async {
-    String token = await getToken();
-    Response response = await Dio().get(
-        "https://60585b2ec3f49200173adcec.mockapi.io/api/v1/blogs/{$id}",
-        options: Options(headers: {'Authorization': 'Bearer $token'}));
-    return response.data;
+  Future getBlog(int id) async {
+    String token = await serviceLocator.get<StorageService>().getToken();
+    Response response;
+    try {
+      response = await Dio().get(
+          "https://60585b2ec3f49200173adcec.mockapi.io/api/v1/blogs/$id",
+          options: Options(headers: {'Authorization': 'Bearer $token'}));
+    } on DioError catch (e) {
+      print(e.message);
+      print(e.response);
+    }
+    print(response.data);
+    blog = Blog.fromJson(response.data);
+    print(blog);
+    return blog;
   }
 }

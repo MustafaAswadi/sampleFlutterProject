@@ -9,8 +9,7 @@ class Landing extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream:
-          Stream.fromFuture(serviceLocator<UserTokenViewModel>().loadData()),
+      stream: Stream.fromFuture(serviceLocator<StorageService>().getToken()),
       builder: (context, snapshot) {
         if (snapshot.data == null) {
           return LoginPage();

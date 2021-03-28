@@ -6,6 +6,8 @@ import 'package:sample_flutter_project/config/theme/textStyle.dart';
 import 'package:sample_flutter_project/ui/views/blogList/blog_list_page.dart';
 
 class LoginPage extends StatelessWidget {
+  final String email = '';
+  final String password = '';
   @override
   Widget build(BuildContext context) {
     double myHeight = MediaQuery.of(context).size.height;
@@ -45,15 +47,17 @@ class LoginPage extends StatelessWidget {
                     style: MyCustomTextStyle().myStyle,
                   ),
                 ),
-                MyCustomTextField("Email"),
-                MyCustomTextField("Password"),
+                MyCustomTextField("Email", email),
+                MyCustomTextField("Password", password),
                 Container(
                   margin: EdgeInsets.only(top: 30.0),
                   width: 200.0,
                   child: RaisedButton(
                     color: Colors.black,
                     onPressed: () async {
-                      // await serviceLocator.get<WebApi>().getToken();
+                      await serviceLocator
+                          .get<WebApi>()
+                          .getToken(email, password);
                       Navigator.push(
                           context,
                           MaterialPageRoute(

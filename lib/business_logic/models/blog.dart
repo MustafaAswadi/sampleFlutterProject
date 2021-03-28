@@ -8,10 +8,10 @@ class Blog {
 
   factory Blog.fromJson(Map<String, dynamic> map) {
     return Blog(
-      createdAt: map['createdAt'],
+      createdAt: map['createdAt'] as String,
       imageUrl: map['imageUrl'],
       title: map['title'],
-      id: map['id'],
+      id: int.parse(map['id']),
     );
   }
 

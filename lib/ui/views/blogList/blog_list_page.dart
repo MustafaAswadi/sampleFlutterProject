@@ -61,13 +61,20 @@ class _BlogListPageState extends State<BlogListPage> {
                       child: ChangeNotifierProvider<BlogListViewModel>(
                         create: (context) => blogListViewModel,
                         child: Consumer<BlogListViewModel>(
-                          builder: (context, model, child) => ListView.builder(
+                            builder: (context, model, child) {
+                          print("list length ${model.blogs.length}");
+                          return ListView.builder(
                             itemCount: model.blogs.length,
                             itemBuilder: (ctx, i) {
-                              return BlogContainer();
+                              return BlogContainer(
+                                createdAt: model.blogs[i].createdAt,
+                                id: model.blogs[i].id,
+                                imageUrl: model.blogs[i].imageUrl,
+                                title: model.blogs[i].title,
+                              );
                             },
-                          ),
-                        ),
+                          );
+                        }),
                       )),
                 ],
               ),

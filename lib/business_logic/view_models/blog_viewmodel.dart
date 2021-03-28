@@ -8,16 +8,19 @@ class BlogViewModel extends ChangeNotifier {
   final WebApi _webApiService = serviceLocator.get<WebApi>();
 
   Blog _blog;
-
+  // bool isLoading = true;
   Blog get blog => _blog;
 
   void loadBlog(int id) async {
-    Blog _blog = await _webApiService.getBlog(id);
-    _prepareBlogToShow(_blog);
+    final _myBlog = await _webApiService.getBlog(id);
+
+    // _prepareBlogToShow(_blog);
+    print("joooooooon    $_myBlog");
+    _blog = _myBlog;
     notifyListeners();
   }
-
-  void _prepareBlogToShow(Blog blog) {
-    _blog = blog;
+  void showCircularLoading() {
+    
+    notifyListeners();
   }
 }

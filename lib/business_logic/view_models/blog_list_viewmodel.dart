@@ -16,16 +16,12 @@ class BlogListViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void _prepareBlogsToShow(List<Map<String, dynamic>> blogs) {
+  void _prepareBlogsToShow(List<Blog> blogs) {
     List<Blog> list = [];
     for (var blog in blogs) {
-      list.add(
-        Blog.fromJson(blog),
-      );
+      list.add(blog);
     }
     _blogs = list;
-    print(_blogs.length);
-    print(_blogs);
   }
 
   void showCircularLoading() {
